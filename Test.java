@@ -10,7 +10,9 @@ import java.io.InputStreamReader;
 public class Test {
     public static void main(String[] args) throws IOException, InterruptedException {
         String[] command = new String[]{
-			"cmd /k start D:\\helen-pages-demo\\run.bat"
+			"cmd /c start D:\\helen-pages-demo\\run.bat",
+				"cmd /c start D:\\helen-pages-demo\\run.bat",
+				"cmd /c start D:\\helen-pages-demo\\run.bat"
         };
 
         for (String s : command) {
