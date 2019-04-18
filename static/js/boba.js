@@ -1,12 +1,38 @@
 $(function () {
     let hash = location.hash.substr(1) || 0;
     let pageNo = +hash;
-    let pageSize = 1;
+    let pageSize = 50;
 
-    let temp = [{"duration":"0小时16分","id":256,"name":"老车主已“哭晕” 长安CS75改的很彻底"},{"duration":"0小时16分","id":129,"name":"《萝卜报告》大元体验全新宝马5系Li"},{"duration":"0小时16分","id":1,"name":"30多万买奔驰大S！还是高配！你受得了吗 | 萝卜小报告"},{"duration":"0小时16分","id":1,"name":"30多万买奔驰大S！还是高配！你受得了吗 | 萝卜小报告"}];
+    function getData(){
+        return new Promise(function(resolve, reject){
+            $.getJSON('http://boba.video/static/data/data.json', function(res){
+                resolve(res)
+            })
+        })
+    }
+    
+    getData().then(res => {
+        let temp = res;
 
-    let total = temp.length;
-    let totalPage = Math.ceil(total / pageSize);
+        let total = temp.length;
+        let totalPage = Math.ceil(total / pageSize);
+
+        tb_render(temp.slice(pageNo * pageSize, (pageNo + 1) * pageSize));
+        page_render(pageNo, totalPage);
+
+        window.addEventListener("hashchange", function(){
+            let hash = location.hash.substr(1) || 0;
+            let pageNoTemp = +hash;
+            tb_render(temp.slice(pageNoTemp * pageSize, (pageNoTemp + 1) * pageSize));
+            if(pageNoTemp > pageNo){
+                pageNo++;
+            }else{
+                pageNo--;
+            }
+            page_render(pageNo, totalPage);
+            
+        }, false);
+    })
 
     function tb_render(data){
         let body = document.getElementById('videoContent');
@@ -32,25 +58,11 @@ $(function () {
         $(body).html('').append(tempStr);
     }
 
-    tb_render(temp.slice(pageNo * pageSize, (pageNo + 1) * pageSize));
-    page_render(pageNo);
-
     new ClipboardJS('.genBtn');
 
-    window.addEventListener("hashchange", function(){
-        let hash = location.hash.substr(1) || 0;
-        let pageNoTemp = +hash;
-        tb_render(temp.slice(pageNoTemp * pageSize, (pageNoTemp + 1) * pageSize));
-        if(pageNoTemp > pageNo){
-            pageNo++;
-        }else{
-            pageNo--;
-        }
-        page_render(pageNo);
-        
-    }, false);
+    
 
-    function page_render(pageNo){
+    function page_render(pageNo, totalPage){
         let body = document.getElementById('page');
         let page = '';
         let next = null,
