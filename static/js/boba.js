@@ -5,7 +5,7 @@ $(function () {
 
     function getData(){
         return new Promise(function(resolve, reject){
-            $.getJSON('http://boba.video/static/data/data.json', function(res){
+            $.getJSON('http://boba.video/static/data/data_car.json', function(res){
                 resolve(res)
             })
         })
