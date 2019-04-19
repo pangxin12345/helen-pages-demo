@@ -1,6 +1,5 @@
 $(function () {
-    let hash = location.hash.substr(1) || 0;
-    let pageNo = +hash;
+    let pageNo = Number(location.search.substr(1).split('=')[1]) || 0;
     let pageSize = 50;
 
     function getData(){
@@ -19,19 +18,6 @@ $(function () {
 
         tb_render(temp.slice(pageNo * pageSize, (pageNo + 1) * pageSize));
         page_render(pageNo, totalPage);
-
-        window.addEventListener("hashchange", function(){
-            let hash = location.hash.substr(1) || 0;
-            let pageNoTemp = +hash;
-            tb_render(temp.slice(pageNoTemp * pageSize, (pageNoTemp + 1) * pageSize));
-            if(pageNoTemp > pageNo){
-                pageNo++;
-            }else{
-                pageNo--;
-            }
-            page_render(pageNo, totalPage);
-            
-        }, false);
     })
 
     function tb_render(data){
@@ -60,8 +46,6 @@ $(function () {
 
     new ClipboardJS('.genBtn');
 
-    
-
     function page_render(pageNo, totalPage){
         let body = document.getElementById('page');
         let page = '';
@@ -70,7 +54,7 @@ $(function () {
         if(pageNo < totalPage - 1){
             if(pageNo <= 0){
                 prev = 0;
-                next = pageNo + 1;
+                next = 1;
             }else{
                 prev = pageNo - 1;
                 next = pageNo + 1;
@@ -84,8 +68,9 @@ $(function () {
                 next = totalPage - 1;
             }
         }
-        page = `<li class="am-pagination-prve"><a href="#${prev}">&laquo; 上一页</a></li>
-                        <li class="am-pagination-next"><a href="#${next}">下一页 &raquo;</a></li>`;
+        console.log(pageNo);
+        page = `${pageNo <= 0 ? '' : `<li class="am-pagination-prve"><a href="?pageNo=${prev}">&laquo; 上一页</a></li>`}
+                ${pageNo >= totalPage - 1 ? '' : `<li class="am-pagination-next"><a href="?pageNo=${next}">下一页 &raquo;</a></li>`}`;
         $(body).html('').append(page);
     }
 
