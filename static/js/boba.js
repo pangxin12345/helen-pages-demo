@@ -2,15 +2,39 @@ $(function () {
     let pageNo = Number(location.search.substr(1).split('=')[1]) || 0;
     let pageSize = 50;
 
-    function getData(){
-        return new Promise(function(resolve, reject){
-            $.getJSON('http://boba.video/static/data/data.json', function(res){
-                resolve(res)
+    function getData(type){
+        if(type === "data_car"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_car.json', function(res){
+                    resolve(res)
+                })
             })
-        })
+        }
+        if(type === "data_car_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_car_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+        if(type === "data_cn_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_cn_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+        if(type === "data_en_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_en_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+
     }
     
-    getData().then(res => {
+    getData("data_car").then(res => {
         let temp = res;
 
         let total = temp.length;
@@ -32,7 +56,7 @@ $(function () {
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
                             <button data-clipboard-text="#${item.id}" class="am-btn am-btn-default am-btn-xs am-text-primary genBtn">
-                                生成
+                                复制编号
                             </button>
                         </div>
                     </div>
