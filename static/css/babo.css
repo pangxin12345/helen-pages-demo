@@ -50,3 +50,26 @@
     padding: 10px 0;
     text-align: center;
 }
+.am-topbar-btn:hover .babo-icon{
+    animation: rotateFn 1.5s;
+}
+@keyframes rotateFn{
+    0% {
+        transform: rotateZ(0);
+    }
+    25%{
+        transform: rotateZ(-45deg);
+    }
+    75% {
+        transform: rotateZ(45deg);
+    }
+    100%{
+        transform: rotateZ(0);
+    }
+}
+.babo-icon{
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background: url('../img/timg.png') no-repeat 0 0 / 10px 20px;
+}

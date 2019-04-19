@@ -1,42 +1,24 @@
 $(function () {
-    let pageNo = Number(location.search.substr(1).split('=')[1]) || 0;
+    let pageNo = qs().pageNo || 0;
     let pageSize = 50;
 
     function getData(type){
-        if(type === "data_car"){
-            return new Promise(function(resolve, reject){
-                $.getJSON('http://boba.video/static/data/data_car.json', function(res){
-                    resolve(res)
-                })
+        return new Promise(function(resolve, reject){
+            $.getJSON(`http://boba.video/static/data/${type}.json`, function(res){
+                resolve(res)
             })
-        }
-        if(type === "data_car_video"){
-            return new Promise(function(resolve, reject){
-                $.getJSON('http://boba.video/static/data/data_car_video.json', function(res){
-                    resolve(res)
-                })
-            })
-        }
-        if(type === "data_cn_video"){
-            return new Promise(function(resolve, reject){
-                $.getJSON('http://boba.video/static/data/data_cn_video.json', function(res){
-                    resolve(res)
-                })
-            })
-        }
-        if(type === "data_en_video"){
-            return new Promise(function(resolve, reject){
-                $.getJSON('http://boba.video/static/data/data_en_video.json', function(res){
-                    resolve(res)
-                })
-            })
-        }
-
+        })
     }
     
     getData("data_car").then(res => {
         let temp = res;
-
+        let k = qs().k && decodeURIComponent(qs().k);
+        if(k){
+            document.getElementById('k').value = k;
+            temp = temp.filter(item => {
+                return item.name.includes(k)
+            });
+        }
         let total = temp.length;
         let totalPage = Math.ceil(total / pageSize);
 
@@ -68,7 +50,7 @@ $(function () {
         $(body).html('').append(tempStr);
     }
 
-    new ClipboardJS('.genBtn');
+    new ClipboardJS('#qq-btn, .genBtn');
 
     function page_render(pageNo, totalPage){
         let body = document.getElementById('page');
@@ -92,10 +74,22 @@ $(function () {
                 next = totalPage - 1;
             }
         }
-        console.log(pageNo);
         page = `${pageNo <= 0 ? '' : `<li class="am-pagination-prve"><a href="?pageNo=${prev}">&laquo; 上一页</a></li>`}
                 ${pageNo >= totalPage - 1 ? '' : `<li class="am-pagination-next"><a href="?pageNo=${next}">下一页 &raquo;</a></li>`}`;
         $(body).html('').append(page);
+    }
+
+    function qs(){
+        let result = {};
+        if(location.search){
+            let str = location.search.substr(1);
+            let param = str.split('&');
+            param.forEach(item => {
+                let arg = item.split('=');
+                result[arg[0]] = arg[1]; 
+            })
+        }
+        return result;
     }
 
 });
