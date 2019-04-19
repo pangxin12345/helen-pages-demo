@@ -3,15 +3,39 @@ $(function () {
     let pageNo = +hash;
     let pageSize = 50;
 
-    function getData(){
-        return new Promise(function(resolve, reject){
-            $.getJSON('http://boba.video/static/data/data_car.json', function(res){
-                resolve(res)
+    function getData(type){
+        if(type === "data_car"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_car.json', function(res){
+                    resolve(res)
+                })
             })
-        })
+        }
+        if(type === "data_car_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_car_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+        if(type === "data_cn_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_cn_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+        if(type === "data_en_video"){
+            return new Promise(function(resolve, reject){
+                $.getJSON('http://boba.video/static/data/data_en_video.json', function(res){
+                    resolve(res)
+                })
+            })
+        }
+
     }
     
-    getData().then(res => {
+    getData("data_car").then(res => {
         let temp = res;
 
         let total = temp.length;
