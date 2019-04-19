@@ -1,5 +1,5 @@
 $(function () {
-    let pageNo = qs().pageNo || 0;
+    let pageNo = Number(qs().pageNo) || 0;
     let pageSize = 50;
 
     function getData(type){
