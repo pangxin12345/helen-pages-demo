@@ -46,7 +46,7 @@ $(function () {
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
                             <button data-clipboard-text="#${item.id}" class="am-btn am-btn-default am-btn-xs am-text-primary genBtn">
-                                生成
+                                复制编号
                             </button>
                         </div>
                     </div>
