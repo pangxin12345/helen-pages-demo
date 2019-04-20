@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class Test {
     public static void main(String[] args) throws IOException, InterruptedException {
         String[] command = new String[]{
-			"cmd /c start D:\\ffmpeg\\bin\\ffmpeg -y -i F:\\MTV\\test\\[奶瓶]每日一曲.Aaliyah.-.[Try.Again].mp4 -i D:\\water\\s-80-40.png -i D:\\water\\n-80-40.png -filter_complex overlay=x=if(lt(mod(t\\,20)\\,10)\\,10\\,NAN ):y=10,overlay=x=if(gt(mod(t\\,20)\\,10)\\,10\\,NAN ) :y=10 F:\\MTV\\test\\1.mp4"
+			"cmd /c  D:\\ffmpeg\\bin\\ffmpeg -y -i F:\\MTV\\test\\[奶瓶]每日一曲.Aaliyah.-.[Try.Again].mp4 -i D:\\water\\s-80-40.png -i D:\\water\\n-80-40.png -filter_complex overlay=x=if(lt(mod(t\\,20)\\,10)\\,10\\,NAN ):y=10,overlay=x=if(gt(mod(t\\,20)\\,10)\\,10\\,NAN ) :y=10 F:\\MTV\\test\\1.mp4"
         };
 
         for (String s : command) {
