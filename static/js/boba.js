@@ -2,18 +2,24 @@ $(function () {
     let pageNo = Number(qs().pageNo) || 0;
     let pageSize = 50;
 
-    function getData(type){
-        return new Promise(function(resolve, reject){
-            $.getJSON(`http://boba.video/static/data/${type}.json`, function(res){
+    function getData(type) {
+        return new Promise(function (resolve, reject) {
+            $.getJSON(`http://boba.video/static/data/${type}.json`, function (res) {
                 resolve(res)
             })
         })
     }
-    
-    getData("data_car").then(res => {
+
+    let name = qs().name;
+
+    if (name == "" || name == null || name == undefined) {
+        name = "data_car";
+    }
+
+    getData(name).then(res => {
         let temp = res;
         let k = qs().k && decodeURIComponent(qs().k);
-        if(k){
+        if (k) {
             document.getElementById('k').value = k;
             temp = temp.filter(item => {
                 return item.name.includes(k)
@@ -26,7 +32,7 @@ $(function () {
         page_render(pageNo, totalPage);
     })
 
-    function tb_render(data){
+    function tb_render(data) {
         let body = document.getElementById('videoContent');
         let tempStr = '';
         data.forEach(item => {
@@ -52,24 +58,24 @@ $(function () {
 
     new ClipboardJS('#qq-btn, .genBtn');
 
-    function page_render(pageNo, totalPage){
+    function page_render(pageNo, totalPage) {
         let body = document.getElementById('page');
         let page = '';
         let next = null,
             prev = null;
-        if(pageNo < totalPage - 1){
-            if(pageNo <= 0){
+        if (pageNo < totalPage - 1) {
+            if (pageNo <= 0) {
                 prev = 0;
                 next = 1;
-            }else{
+            } else {
                 prev = pageNo - 1;
                 next = pageNo + 1;
             }
-        }else{
-            if(pageNo <= 0){
+        } else {
+            if (pageNo <= 0) {
                 prev = 0;
                 next = totalPage - 1;
-            }else{
+            } else {
                 prev = pageNo - 1;
                 next = totalPage - 1;
             }
@@ -79,14 +85,14 @@ $(function () {
         $(body).html('').append(page);
     }
 
-    function qs(){
+    function qs() {
         let result = {};
-        if(location.search){
+        if (location.search) {
             let str = location.search.substr(1);
             let param = str.split('&');
             param.forEach(item => {
                 let arg = item.split('=');
-                result[arg[0]] = arg[1]; 
+                result[arg[0]] = arg[1];
             })
         }
         return result;
