@@ -14,7 +14,14 @@ $(function () {
 
     if (name == "" || name == null || name == undefined) {
         name = "data_car";
+    }else if(name == "cv"){
+        name = "data_car_video";
+    }else if(name == "cnv"){
+        name = "data_cn_video";
+    }else if(name == "env"){
+        name = "data_en_video";
     }
+
 
     getData(name).then(res => {
         let temp = res;
