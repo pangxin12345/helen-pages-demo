@@ -14,11 +14,11 @@ $(function () {
 
     if (name == "" || name == null || name == undefined) {
         name = "data_car";
-    }else if(name == "cv"){
+    } else if (name == "cv") {
         name = "data_car_video";
-    }else if(name == "cnv"){
+    } else if (name == "cnv") {
         name = "data_cn_video";
-    }else if(name == "env"){
+    } else if (name == "env") {
         name = "data_en_video";
     }
 
@@ -36,7 +36,7 @@ $(function () {
         let totalPage = Math.ceil(total / pageSize);
 
         tb_render(temp.slice(pageNo * pageSize, (pageNo + 1) * pageSize));
-        page_render(pageNo, totalPage);
+        page_render(pageNo, totalPage, name);
     })
 
     function tb_render(data) {
@@ -65,7 +65,7 @@ $(function () {
 
     new ClipboardJS('#qq-btn, .genBtn');
 
-    function page_render(pageNo, totalPage) {
+    function page_render(pageNo, totalPage, name) {
         let body = document.getElementById('page');
         let page = '';
         let next = null,
@@ -87,8 +87,8 @@ $(function () {
                 next = totalPage - 1;
             }
         }
-        page = `${pageNo <= 0 ? '' : `<li class="am-pagination-prve"><a href="?pageNo=${prev}">&laquo; 上一页</a></li>`}
-                ${pageNo >= totalPage - 1 ? '' : `<li class="am-pagination-next"><a href="?pageNo=${next}">下一页 &raquo;</a></li>`}`;
+        page = `${pageNo <= 0 ? '' : `<li class="am-pagination-prve"><a href="?pageNo=${prev}&name=${name}">&laquo; 上一页</a></li>`}
+                ${pageNo >= totalPage - 1 ? '' : `<li class="am-pagination-next"><a href="?pageNo=${next}&name=${name}">下一页 &raquo;</a></li>`}`;
         $(body).html('').append(page);
     }
 
