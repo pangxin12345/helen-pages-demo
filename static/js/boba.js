@@ -21,6 +21,8 @@ $(function () {
     } else if (name == "env") {
         name = "data_en_video";
     }
+    
+    document.getElementById('name').value = name;
 
 
     getData(name).then(res => {
