@@ -22,7 +22,7 @@ $(function () {
         name = "data_en_video";
     }
     
-    document.getElementById('env').value = name;
+    document.getElementById('env').value = qs().name;
 
 
     getData(name).then(res => {
