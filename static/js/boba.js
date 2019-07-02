@@ -21,9 +21,9 @@ $(function () {
     } else if (name == "env") {
         name = "data_en_video";
     }
-    
-    document.getElementById('env').value = qs().name;
-
+    if(qs().name){
+        document.getElementById('env').value = qs().name;
+    }
 
     getData(name).then(res => {
         let temp = res;
