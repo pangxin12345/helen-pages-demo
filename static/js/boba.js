@@ -117,7 +117,7 @@ $(function () {
         }
         let loading = `<div class="loading">
                             <div class="loading-box">
-                                <img src="./static/img/timg.png" />
+                                <img src="./static/img/timg.png" />加载中...
                             </div>
                         </div>`;
         $(document.body).append(loading);
