@@ -111,16 +111,7 @@ $(function () {
     }
     
     function render_loading(){
-        if($('.loading').length > 0) {
-            $('.loading').show();
-            return false;
-        }
-        let loading = `<div class="loading">
-                            <div class="loading-box">
-                                <img src="./static/img/timg.png" />加载中...
-                            </div>
-                        </div>`;
-        $(document.body).append(loading);
+        $('.loading').show();
     }
     function remove_loading(){
         $('.loading').hide();
