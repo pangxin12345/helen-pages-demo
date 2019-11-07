@@ -111,8 +111,8 @@ $(function () {
     }
     
     function render_loading(){
-        if($('.loading').lengh > 0) {
-            $('.loading).show();
+        if($('.loading').length > 0) {
+            $('.loading').show();
             return false;
         }
         let loading = `<div class="loading">
