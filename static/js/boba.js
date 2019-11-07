@@ -3,9 +3,11 @@ $(function () {
     let pageSize = 50;
 
     function getData(type) {
+        render_loading();
         return new Promise(function (resolve, reject) {
             $.getJSON(`http://boba.video/static/data/${type}.json`, function (res) {
                 resolve(res)
+                remove_loading();
             })
         })
     }
@@ -106,6 +108,20 @@ $(function () {
             })
         }
         return result;
+    }
+    
+    function render_loading(){
+        if($('.loading').lengh > 0) {
+            $('.loading).show();
+            return false;
+        }
+        let loading = `<div class="loading">
+                            <img src="../img/timg.png" />
+                        </div>`;
+        $(body).append(loading);
+    }
+    function remove_loading(){
+        $('.loading').hide();
     }
 
 });
