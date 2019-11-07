@@ -116,7 +116,7 @@ $(function () {
             return false;
         }
         let loading = `<div class="loading">
-                            <img src="../img/timg.png" />
+                            <img src="./static/img/timg.png" />
                         </div>`;
         $(document.body).append(loading);
     }
