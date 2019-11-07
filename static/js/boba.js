@@ -118,7 +118,7 @@ $(function () {
         let loading = `<div class="loading">
                             <img src="../img/timg.png" />
                         </div>`;
-        $(body).append(loading);
+        $(document.body).append(loading);
     }
     function remove_loading(){
         $('.loading').hide();
